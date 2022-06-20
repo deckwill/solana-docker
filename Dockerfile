@@ -60,7 +60,11 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 RUN cargo --version
 
 FROM solanalabs/solana:v1.10.26
-# install poetry 
+# install python
+
+RUN apt update && \
+    apt install -y python3 python3-pip &&\
+    pip3 install poetry
 
 ENTRYPOINT bash
 # CMD ["bash"]
