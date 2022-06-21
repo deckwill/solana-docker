@@ -3,7 +3,7 @@
 Docker image for solana development. Includes [bpf-tools](https://github.com/solana-labs/bpf-tools) and [solana image](https://hub.docker.com/r/solanalabs/solana).
 
 
-Use [`docker load`](https://docs.docker.com/engine/reference/commandline/load/) to create the image.
+Use [`docker load`](https://docs.docker.com/engine/reference/commandline/load/) to deploy the image.
 
 ```console
 docker load < solana-bpf.tar.gz

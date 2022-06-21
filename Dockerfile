@@ -2,7 +2,7 @@
 # https://github.com/solana-labs/bpf-tools/blob/master/Dockerfile
 
 FROM launcher.gcr.io/google/debian9:latest as builder
-LABEL maintainer "Solana Maintainers"
+LABEL maintainer "William Deck"
 
 # Import public key required for verifying signature of cmake download.
 # Note, this often fails, do it first
@@ -57,14 +57,17 @@ RUN mkdir /tmp/cmake-install && cd /tmp/cmake-install && \
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
+# COPY /root/.cargo/bin /usr/bin/
 RUN cargo --version
 
 FROM solanalabs/solana:v1.10.26
+COPY --from=builder root/.cargo/ /root/.cargo/
 # install python
-
+ENV PATH="/root/.cargo/bin:${PATH}"
 RUN apt update && \
     apt install -y python3 python3-pip &&\
     pip3 install poetry
+RUN rustup install nightly
 
 ENTRYPOINT bash
 # CMD ["bash"]
